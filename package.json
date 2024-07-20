@@ -1,8 +1,35 @@
 {
+
+  "author": "Pablo Martinez",
+  "license": "MIT",
   "name": "toju-react-hooks",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "main": "dist/toju-react-hooks.umd.cjs",
+  "module": "dist/toju-react-hooks.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "." : {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/toju-react-hooks.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/toju-react-hooks.umd.cjs"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toju-development/toju-react-hooks"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -20,6 +47,7 @@
     "react-dom": "^18.3.1",
     "toju-basic-utils": "^1.0.3"
   },
+  "peerDependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
@@ -32,6 +60,7 @@
     "@typescript-eslint/parser": "^7.13.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "@vitest/coverage-v8": "^1.6.0",
+    "axios-mock-adapter": "^1.22.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
@@ -43,5 +72,11 @@
     "vite-plugin-dts": "^3.9.1",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^1.6.0"
-  }
+  },
+  "keywords": [
+    "hooks",
+    "HOC",
+    "isInViewport",
+    "useThrottle"
+  ]
 }

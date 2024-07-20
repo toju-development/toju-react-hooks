@@ -29,7 +29,7 @@ export default defineConfig({
     react(),
     dts({ 
       outDir: 'dist', 
-      exclude: ['**/*.test.ts'] 
+      exclude: ['**/*.test.ts', '**/*.test.tsx'] 
     }),
     tsconfigPaths()
   ],
