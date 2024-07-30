@@ -3,7 +3,7 @@
   "author": "Pablo Martinez",
   "license": "MIT",
   "name": "toju-react-hooks",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "dist/toju-react-hooks.umd.cjs",
   "module": "dist/toju-react-hooks.js",

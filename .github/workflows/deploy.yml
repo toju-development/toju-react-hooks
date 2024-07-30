@@ -58,5 +58,10 @@ jobs:
 
       - name: 🚀 Publish to npm
         uses: JS-DevTools/npm-publish@v1
+        id: publish
         with:
           token: ${{ secrets.NPM_TOKEN }}
+
+      - if: ${{ steps.publish.outputs.type }}
+        run: |
+          echo "Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }}"
