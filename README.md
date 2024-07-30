@@ -26,6 +26,8 @@ Function                                  | Description
 [`useIsInView(options)`](#useisinview)    | Determine if a referenced element is within the viewport
 [`useThrottle(fn, delay)`](#usethrottle)  | Throttle a function execution to limit how often it can be called            
 [`useWindowsResize()`](#usewindowsresize) | Track window resize events and provide the current window dimensions
+[`useDebounce(fn, delay)`](#usedebounce)  | Debounce a function execution to limit how often it can be called
+
 
 
 ## HOC List
@@ -109,7 +111,7 @@ Custom hook that determines if a referenced element is within the viewport using
 
 ```typescript
 import React, { useRef } from 'react';
-import { useIsInView } from './useIsInView';
+import { useIsInView } from 'toju-react-hooks';
 
 const Component = () => {
   const ref = useRef(null);
@@ -140,7 +142,7 @@ Custom hook to throttle a function execution, limiting how often it can be calle
 
 ```typescript
 import React, { useState } from 'react';
-import { useThrottle } from './useThrottle';
+import { useThrottle } from 'toju-react-hooks';
 
 const ThrottledComponent = () => {
   const [count, setCount] = useState(0);
@@ -169,7 +171,7 @@ Custom hook to track window resize events and provide the current window dimensi
 
 ```typescript
 import React from 'react';
-import { useWindowsResize } from './useWindowsResize';
+import { useWindowsResize } from 'toju-react-hooks';
 
 const Component = () => {
   const { width, height } = useWindowsResize();
@@ -178,6 +180,45 @@ const Component = () => {
     <div>
       <p>Window width: {width}</p>
       <p>Window height: {height}</p>
+    </div>
+  );
+};
+```
+
+### `useDebounce`
+
+Custom hook to debounce a function execution, limiting how often it can be called.
+
+#### Parameters
+
+- `fn`: The function to be throttled.
+- `delay`: The time (in milliseconds) to wait before the function can be called again.
+
+#### Returns
+
+- A debounced version of the passed function that respects the specified delay between calls.
+
+#### Example Usage
+
+```typescript
+import React, { useState } from 'react';
+import { useDebounce } from 'toju-react-hooks';
+
+const DebouncedComponent = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearch = useDebounce((term) => {
+    // Perform search with the term
+    console.log('Searching for:', term);
+  }, 500);
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    debouncedSearch(event.target.value);
+  };
+
+  return (
+    <div>
+      <input type="text" value={searchTerm} onChange={handleChange} />
     </div>
   );
 };
@@ -208,7 +249,7 @@ Higher-order component (HOC) designed to enhance a component with tracking capab
 
 ```typescript
 import React from 'react';
-import { withTracking } from './withTracking';
+import { withTracking } from 'toju-react-hooks';
 import MyComponent from './MyComponent';
 
 const trackEvent = (eventName, data) => {
