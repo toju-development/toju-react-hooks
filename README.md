@@ -27,6 +27,8 @@ Function                                  | Description
 [`useThrottle(fn, delay)`](#usethrottle)  | Throttle a function execution to limit how often it can be called            
 [`useWindowsResize()`](#usewindowsresize) | Track window resize events and provide the current window dimensions
 [`useDebounce(fn, delay)`](#usedebounce)  | Debounce a function execution to limit how often it can be called
+[`useMediaQuery(query)`](#usemediaquery)  | Evaluate a media query and return a boolean indicating if it matches
+[`useMedia()`](#usemedia)                 | Evaluate multiple media queries and return their respective boolean values
 
 
 
@@ -219,6 +221,86 @@ const DebouncedComponent = () => {
   return (
     <div>
       <input type="text" value={searchTerm} onChange={handleChange} />
+    </div>
+  );
+};
+```
+
+### `useMediaQuery`
+
+Custom hook to evaluate a media query and return a boolean indicating if it matches.
+
+#### Parameters
+
+- `query`: The media query string to be evaluated.
+
+#### Returns
+
+- A boolean value indicating whether the media query matches (`true`) or not (`false`).
+
+#### Example Usage
+
+```typescript
+import React from 'react';
+import { useMediaQuery } from 'toju-react-hooks';
+
+const ResponsiveComponent = () => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
+  return (
+    <div>
+      {isMobile ? (
+        <p>Estás en un dispositivo móvil</p>
+      ) : (
+        <p>Estás en un dispositivo de escritorio</p>
+      )}
+    </div>
+  );
+};
+```
+
+### `useMedia`
+
+Custom hook to evaluate multiple media queries and return their respective boolean values.
+
+#### Parameters
+
+- None
+
+#### Returns
+
+An object containing boolean values for each media query:
+- `isMobile`: Indicates if the viewport matches the mobile media query.
+- `isTablet`: Indicates if the viewport matches the tablet media query.
+- `isDesktop`: Indicates if the viewport matches the desktop media query.
+- `isBigDesktop`: Indicates if the viewport matches the big desktop media query.
+- `isLessThanDesktop`: Indicates if the viewport matches the less than desktop media query.
+- `isMoreThanMobile`: Indicates if the viewport matches the more than mobile media query.
+
+#### Example Usage
+
+```typescript
+import React from 'react';
+import { useMedia } from 'toju-react-hooks';
+
+const ResponsiveComponent = () => {
+  const {
+    isMobile,
+    isTablet,
+    isDesktop,
+    isBigDesktop,
+    isLessThanDesktop,
+    isMoreThanMobile
+  } = useMedia();
+
+  return (
+    <div>
+      {isMobile && <p>Estás en un dispositivo móvil</p>}
+      {isTablet && <p>Estás en un dispositivo tablet</p>}
+      {isDesktop && <p>Estás en un dispositivo de escritorio</p>}
+      {isBigDesktop && <p>Estás en un dispositivo de escritorio grande</p>}
+      {isLessThanDesktop && <p>Estás en un dispositivo menor que un escritorio</p>}
+      {isMoreThanMobile && <p>Estás en un dispositivo mayor que un móvil</p>}
     </div>
   );
 };
